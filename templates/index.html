@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heart Disease Prediction</title>
+  <style>
+    :root{--accent:#e23b3b;--muted:#6b7280}
+    html,body{height:100%;margin:0}
+    body{
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background-image: linear-gradient(rgba(6,8,15,0.45), rgba(6,8,15,0.45)), url("{{ url_for('static', filename='pic1.jpg') }}");
+      background-size: cover;background-position:center;background-repeat:no-repeat;color:#0f172a;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    }
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px}
+    .card{max-width:1100px;width:100%;display:flex;gap:28px;background:rgba(255,255,255,0.95);border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.35);align-items:center}
+    .hero{flex:1}
+    .hero h1{margin:0 0 12px;font-size:clamp(1.6rem,3.5vw,2.6rem);color:#0b1220}
+    .hero p{margin:0 0 18px;color:var(--muted)}
+    .actions{display:flex;gap:12px;align-items:center}
+    .btn{display:inline-block;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--accent);color:white;box-shadow:0 6px 18px rgba(226,59,59,0.18)}
+    .btn-ghost{background:transparent;color:var(--accent);border:2px solid rgba(226,59,59,0.12)}
+    .features{flex-basis:360px;padding:10px}
+    .feature{display:flex;align-items:flex-start;gap:10px;padding:8px 0}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:6px}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:0.9rem}
+    @media (max-width:880px){.card{flex-direction:column}.features{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <h1>Heart Disease Risk — Fast, Private, and Simple</h1>
+        <p>Use a quick clinical form to get a model-based risk assessment. This is intended for educational/demo purposes and not a medical diagnosis.</p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="/home">Predict Now</a>
+          <a class="btn btn-ghost" href="/home">Learn More</a>
+        </div>
+
+        <footer>Built with your model — ensure `models/logistic.pkl` and `models/scaler.pkl` exist.</footer>
+      </div>
+
+      <aside class="features">
+        <div style="font-weight:700;margin-bottom:8px;color:#0b1220">Why try it?</div>
+        <div class="feature"><div class="dot"></div><div><strong>Quick inputs</strong><div style="color:var(--muted);font-size:0.95rem">Enter clinical values and submit.</div></div></div>
+        <div class="feature"><div class="dot"></div><div><strong>Model-based</strong><div style="color:var(--muted);font-size:0.95rem">Prediction from your trained logistic model.</div></div></div>
+        <div class="feature"><div class="dot"></div><div><strong>Privacy</strong><div style="color:var(--muted);font-size:0.95rem">No data leaves your machine when running locally.</div></div></div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

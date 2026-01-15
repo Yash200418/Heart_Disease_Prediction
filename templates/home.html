@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Heart Disease Prediction</title>
+    <style>
+        :root{ --accent:#e53935; --bg:#f6f7fb; --card:#ffffff; --muted:#666; }
+        body{ margin:0; font-family:Inter,system-ui,Arial,Helvetica,sans-serif; background:var(--bg); color:#222; }
+        .hero{ display:flex; align-items:center; justify-content:center; min-height:100vh; gap:32px; padding:40px; background-repeat:no-repeat; background-size:cover; background-position:center; }
+        .hero-img{ display:none; }
+        .card{ background:var(--card); padding:36px; border-radius:12px; box-shadow:0 8px 24px rgba(16,24,40,0.06); width:560px; max-width:95vw; }
+        h1{ margin:0 0 14px 0; font-size:1.6rem; color:var(--accent); }
+        form{ display:grid; gap:10px; }
+        input[type=text]{ padding:10px 12px; border:1px solid #e6e9ef; border-radius:8px; font-size:0.95rem; }
+        .row{ display:flex; gap:10px; }
+        .row input{ flex:1; }
+        button{ background:var(--accent); color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:600; cursor:pointer; }
+        .result{ margin-top:14px; padding:12px; border-radius:8px; background:linear-gradient(90deg,rgba(229,57,53,0.06),rgba(229,57,53,0.03)); }
+        .muted{ color:var(--muted); font-size:0.9rem; }
+        .percent{ font-weight:700; color:var(--accent); }
+        @media (max-width:800px){ .hero{ flex-direction:column-reverse; padding:20px; } .hero-img{ max-width:90vw; width:100%; } }
+    </style>
+</head>
+<body>
+    <div class="hero" style="position:relative;">
+        <div class="card">
+            <h1>Heart Disease Risk</h1>
+            <p class="muted">Fill the form below to get a risk estimate in percentage.</p>
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post">
+                <div class="row">
+                    <input type="text" name="age" placeholder="Age" required>
+                    <input type="text" name="systolic_pressure" placeholder="Systolic" required>
+                </div>
+                <div class="row">
+                    <input type="text" name="diastolic_pressure" placeholder="Diastolic" required>
+                    <input type="text" name="physical_activity" placeholder="Physical Activity" required>
+                </div>
+                <div class="row">
+                    <input type="text" name="smoking" placeholder="Smoking (0/1)" required>
+                    <input type="text" name="diabetes" placeholder="Diabetes (0/1)" required>
+                </div>
+                <div class="row">
+                    <input type="text" name="alcohol" placeholder="Alcohol (0/1)" required>
+                    <input type="text" name="total_cholesterol" placeholder="Cholesterol" required>
+                </div>
+
+                <button type="submit">Predict</button>
+            </form>
+
+            <div class="result">
+                {% if result %}
+                    <h2>Prediction: <span class="percent">{{ result }}</span></h2>
+                {% else %}
+                    <p class="muted">No prediction yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var el = document.querySelector('.hero');
+            if(el){
+                el.style.backgroundImage = "url('{{ url_for('static', filename='pic1.jpg') }}')";
+                el.style.backgroundRepeat = 'no-repeat';
+                el.style.backgroundSize = 'cover';
+                el.style.backgroundPosition = 'center';
+            }
+        });
+    </script>
+</body>
+</html>
